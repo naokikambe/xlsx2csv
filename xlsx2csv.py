@@ -207,7 +207,8 @@ class Xlsx2csv:
 
     def __del__(self):
         # make sure to close zip file, ziphandler does have a close() method
-        self.ziphandle.close()
+        if hasattr(self, "ziphandle") and hasattr(self.ziphandle, "close"):
+            self.ziphandle.close()
 
     def getSheetIdByName(self, name):
         for s in self.workbook.sheets:
